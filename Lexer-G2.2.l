@@ -12,14 +12,14 @@ metanc 					(<meta[\ ](name=(\"[a-zA-Z0-9]*\"))?(content=(\"[a-zA-Z0-9]*\"))?>)
 atg 					((class=\"([a-z]{2})\")?(id=\"([a-z]{2})\")?)
 atype 					(type=("[a-zA-Z0-9]*")>)
 atvalue 				(value=("[0-9]*")>)
-athref 	 				(href=((\"(http(s)?|ftp(s)?):\/\/(w{3}.)?([0-9]*[a-zA-Z]*[0-9]*.[a-zA-Z]{2,3})?(\:[0-9]+)?(\/[a-zA-Z0-9]*(.[a-zA-Z]+)?)*(\#[a-zA-Z0-9]+)?\")))
+athref 	 				(href=(\"(http(s)?|ftp(s)?):\/\/(w{3}.)?([0-9]*[a-zA-Z]*[0-9]*.[a-zA-Z]{2,3})?(\:[0-9]+)?(\/[a-zA-Z0-9]*(.[a-zA-Z]+)?)*(\#[a-zA-Z0-9]+)?\"))
 atarget					(target=(\_blank|\_parent|\_self|\_top))
 atalt					(alt=("[a-zA-Z0-9]*"))
 atwh					((width=[0-9]+(\.[0-9]+)?(\%)?)?(height=[0-9]+(\.[0-9]+)?(\%)?)?)
 atb						(border=([0-9]+))
 atc						(<caption>)
 cierreatc				(<\/caption>)
-atsrc 					(src=((\"((http(s)?|ftp(s)?):\/\/)?(w{3}.)?([0-9]*[a-zA-Z]*[0-9]*.[a-zA-Z]{2,3})?(\:[0-9]+)?(\/[a-zA-Z0-9]*(.[a-zA-Z]+)?)*(\#[a-zA-Z0-9]+)?\")))
+atsrc 					(src=(\"(http(s)?|ftp(s)?):\/\/(w{3}.)?([0-9]*[a-zA-Z]*[0-9]*.[a-zA-Z]{2,3})?(\:[0-9]+)?(\/[a-zA-Z0-9]*(.[a-zA-Z]+)?)*(\#[a-zA-Z0-9]+)?\"))
 
 metacharset				(<meta[\ ]charset=(\"(UTF-8)\")>)
 header					(<h[1-6]{1}>)
@@ -43,10 +43,10 @@ spc						[\ ]*
 {metanc}						{printf ("Se encontro apertura de etiqueta meta\n");}
 "<title>"						{printf ("Se encontro apertura de title\n");}
 "</title>"						{printf ("Se encontro cierre de title\n");}
-"<section>"						{printf ("Se encontro apertura de section\n");}
-"</section>"					{printf ("Se encontro cierre de etiqueta section\n");}
-"<div>"							{printf ("Se encontro apertura de etiqueta div\n");}
-"</div>"						{printf ("Se encontro cierre de div\n");}
+"<section>"						{printf ("Se encontro apertura de atributo section\n");}
+"</section>"						{printf ("Se encontro cierre de atributo section\n");}
+"<div>"							{printf ("Se encontro apertura de atributo div\n");}
+"</div>"						{printf ("Se encontro cierre de atributo de div\n");}
 "<p>"							{printf ("Se encontro apertura de parrafo\n");}
 "</p>"							{printf ("Se encontro cierre de etiqueta parrafo\n");}
 {header}						{printf ("Se encontro apertura de header\n");}
@@ -98,9 +98,9 @@ spc						[\ ]*
 {cierreatc}						{printf ("Se encontro cierre de atributo caption\n");}
 {atsrc}							{printf ("Se encontro atributo src\n");}
 
-{url}							{}
-{an}							{}
-{num}							{}
+{url}							{printf ("Se encontro url\n");}
+{an}							{printf ("Se encontro texto\n");}
+{num}							{printf ("Se encontro numeros\n");}
 {spc}							{}
 .								{printf ("ERROR");}
 %%
